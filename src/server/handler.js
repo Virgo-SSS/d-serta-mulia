@@ -19,13 +19,16 @@ async function postPredictHandler(request, h) {
         "createdAt": createdAt
     }
 
+    await storeData(id, data);
+
     const response = h.response({
         status: 'success',
         message: confidenceScore > 99 ? 'Model is predicted successfully.' : 'Model is predicted successfully but under threshold. Please use the correct picture',
         data
     })
-    
+
     response.code(201);
+    
     return response;
 }
 
